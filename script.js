@@ -110,6 +110,7 @@ function initialize_sessions() {
   var i = 0;
   container.removeChild(template);
 
+  var checked_session = null;
   for (i = 0; i < lightdm.sessions.length; i = i + 1) {
     var session = lightdm.sessions[i];
     var s = template.cloneNode(true);
@@ -124,6 +125,13 @@ function initialize_sessions() {
 
     if (session.key === lightdm.default_session) {
       radio.checked = true;
+      if (checked_session != null) {
+        checked_session.checked = false;
+      }
+      checked_session = radio;
+    } else if (i == 0) {
+      checked_session = radio;
+      checked_session.checked = true;
     }
 
     container.appendChild(s);
