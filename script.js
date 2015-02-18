@@ -69,7 +69,7 @@ function authentication_complete() {
   }
 
   if (lightdm.is_authenticated) {
-    show_message("Autentication complete, open session: " + selected_session);
+    show_message("Autentication complete, open session: " + key);
     if (key === "") {
         key = lightdm.default_session;
     }
