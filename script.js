@@ -69,11 +69,14 @@ function authentication_complete() {
   }
 
   if (lightdm.is_authenticated) {
+    show_message("Autentication complete, open session: " + selected_session);
     if (key === "") {
-      lightdm.login(lightdm.authentication_user, lightdm.default_session);
-    } else {
-      lightdm.login(lightdm.authentication_user, key);
+        key = lightdm.default_session;
     }
+    show_message("Autentication complete, open session: " + key);
+    lightdm.login(lightdm.authentication_user, key);
+    show_error("Open session '" + key + "' failed.");
+    start_authentication(selected_user);
   } else {
     show_error("Authentication Failed");
     start_authentication(selected_user);
